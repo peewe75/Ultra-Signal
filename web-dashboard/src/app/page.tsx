@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Clock, LogIn, Send, MessageSquare, Info, UserPlus, Key, MousePointer2, TrendingUp, Zap } from "lucide-react";
+import { Clock, MessageSquare, UserPlus, Key, MousePointer2, TrendingUp, Zap } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -97,14 +97,29 @@ export default function LandingPage() {
 
       {/* Navbar */}
       <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} className="fixed top-0 w-full z-40 border-b border-white/5 bg-black/40 backdrop-blur-2xl">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-bold">BCS</div>
-            <span className="font-semibold text-xl tracking-tight text-white uppercase italic tracking-tighter">BCS AI</span>
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-4 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            {/* Logo Container with Neon Effect - Photo 1 Style */}
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-500" />
+              <div className="relative w-11 h-11 rounded-xl bg-black border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl">
+                <Image
+                  src="/logo_bcs.png"
+                  alt="BCS Logo"
+                  width={34}
+                  height={34}
+                  className="object-contain brightness-110 contrast-125"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-black text-xl tracking-tighter text-white uppercase italic leading-none">BCS AI</span>
+              <span className="text-[8px] font-bold text-blue-500 uppercase tracking-[0.3em] leading-none mt-1">Intelligence Hub</span>
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/admin" className="hidden md:flex text-[10px] font-black text-red-400 border border-red-500/20 bg-red-500/10 rounded-full px-4 py-1.5 uppercase hover:bg-red-500/20 transition-all">Area Admin</Link>
-            <Link href="/sign-in" className="text-sm font-black text-gray-300 hover:text-white border border-white/5 rounded-full px-4 py-1.5 transition-all bg-zinc-900 border-white/10 shadow-xl shadow-white/5">Accedi</Link>
+            <Link href="/sign-in" className="text-sm font-black text-gray-300 hover:text-white border border-white/5 rounded-full px-5 py-2 transition-all bg-white/5 hover:bg-white/10 backdrop-blur-md">Accedi</Link>
           </div>
         </div>
       </motion.nav>
@@ -147,7 +162,7 @@ export default function LandingPage() {
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter uppercase italic">Automazione <span className="text-blue-500">Zero Stress</span></h2>
             <div className="flex justify-center items-center gap-4 text-gray-500 font-bold uppercase tracking-[0.3em] text-[10px] border border-white/5 bg-zinc-900/40 px-6 py-2 rounded-full w-fit mx-auto">
-              <span className="text-blue-500 tracking-normal italic">Nessun VPS da pagare</span> // <span>Configurazione istantanea</span>
+              <span className="text-blue-500 tracking-normal italic">Nessun VPS da pagare</span> {"//"} <span>Configurazione istantanea</span>
             </div>
           </div>
 
@@ -267,7 +282,19 @@ export default function LandingPage() {
       <footer className="border-t border-white/5 py-12 bg-black relative z-[60] text-center">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center font-black text-white text-sm">BCS</div>
+            {/* Logo Footer with Neon Effect */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl blur opacity-10 group-hover:opacity-30 transition-opacity duration-500" />
+              <div className="relative w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/logo_bcs.png"
+                  alt="BCS Logo"
+                  width={28}
+                  height={28}
+                  className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                />
+              </div>
+            </div>
             <span className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em]">powered by <Link href="https://www.bcs-ai.com" target="_blank" className="text-white hover:text-blue-500">BCS ADVISORY</Link></span>
           </div>
           <div className="text-[10px] font-black uppercase tracking-widest text-gray-700">
