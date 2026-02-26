@@ -60,12 +60,13 @@ bot.on('message', async (ctx: Context) => {
 
 async function handlePrivateMessage(ctx: Context, text: string, chatId: string): Promise<void> {
   const normalizedText = text.trim();
+  console.log(`Handling message: "${normalizedText}" from chatId: ${chatId}`);
 
   if (normalizedText.startsWith('/start')) {
     await ctx.reply(
-      '👋 Benvenuto su SoftiBridge Auto-Trading!\n\n' +
+      '👋 Benvenuto su BCS AI Auto-Trading!\n\n' +
       'Per attivare i tuoi servizi, invia la tua License Key.\n\n' +
-      '💡 Esempio: SB-ABCD-1234-EFGH\n\n' +
+      '💡 Esempio: BCS-ABCD-1234-EFGH\n\n' +
       'Se non l&apos;hai ancora attivata, vai nella tua Dashboard sul sito.'
     );
     return;
@@ -76,37 +77,44 @@ async function handlePrivateMessage(ctx: Context, text: string, chatId: string):
     if (key) {
       await validateAndLinkLicense(ctx, key, chatId);
     } else {
-      await ctx.reply('Usa il comando seguita dalla chiave, es: /sync SB-XXXX-XXXX');
+      await ctx.reply('Usa il comando seguita dalla chiave, es: /sync BCS-XXXX-XXXX');
     }
     return;
   }
 
-  // Se sembra una licenza (SB- o stringa lunga base64)
-  if ((normalizedText.startsWith('SB-') && normalizedText.length > 5) || normalizedText.length > 20) {
-    await validateAndLinkLicense(ctx, normalizedText, chatId);
-    return;
-  }
-
-  // If it's not a start command and not a license key, let's see if it's a simulated signal sent in private chat
+  // 1. Prova a vedere se è un Segnale di Trading (prioritario se il testo è lungo)
   const signal = parseSignalMessage(normalizedText, chatId);
   if (signal) {
     console.log('Simulated Signal received in private chat:', JSON.stringify(signal, null, 2));
     if (signalCallback) {
       signalCallback(signal);
-      await ctx.reply('✅ Segnale di test riconosciuto e inviato al motore di esecuzione!');
+      await ctx.reply('✅ Segnale ricevuto! Sto elaborando l\'ordine...');
+    } else {
+      await ctx.reply('⚠️ Motore di trading non pronto. Riprova tra un istante.');
     }
     return;
   }
 
+  // 2. Se sembra una licenza (BCS- o stringa base64 molto specifica senza spazi)
+  const looksLikeLicense = (normalizedText.startsWith('BCS-') && normalizedText.length > 5) ||
+    (normalizedText.length > 25 && !normalizedText.includes(' '));
+
+  if (looksLikeLicense) {
+    await validateAndLinkLicense(ctx, normalizedText, chatId);
+    return;
+  }
+
   await ctx.reply(
-    'Invia una License Key valida per collegare il tuo account.\n' +
-    'Oppure usa /help per maggiori informazioni.'
+    'Non ho riconosciuto il comando.\n\n' +
+    '• Per collegarti: invia la tua License Key (BCS-XXXX-XXXX)\n' +
+    '• Per i segnali: invia un messaggio nel formato BUY/SELL SYMBOL @ PRICE'
   );
 }
 
 async function validateAndLinkLicense(ctx: Context, licenseKey: string, telegramChatId: string): Promise<void> {
   try {
     const firestore = getFirestore();
+    console.log(`Validating license key: ${licenseKey} for chatId: ${telegramChatId}`);
     const licensesRef = firestore.collection('licenses');
 
     // Cerchiamo in due modi per compatibilità: 
@@ -135,7 +143,9 @@ async function validateAndLinkLicense(ctx: Context, licenseKey: string, telegram
     }
 
     const userId = licenseData.userId;
+    console.log(`License found! Status: ${licenseData.status}, User: ${userId}`);
     if (!userId) {
+      console.error(`License ${licenseKey} has no userId! Data:`, licenseData);
       await ctx.reply('❌ Errore interno: licenza non associata a un utente.');
       return;
     }
@@ -150,9 +160,11 @@ async function validateAndLinkLicense(ctx: Context, licenseKey: string, telegram
 
     await usersRef.doc(userId).update({
       telegramChatId: telegramChatId,
-      telegram_id: Number(telegramChatId), // Aggiorniamo anche questo per coerenza
+      telegram_id: Number(telegramChatId),
       linkedAt: new Date(),
     });
+
+    console.log(`Successfully linked ${userId} with telegramChatId: ${telegramChatId}`);
 
     await ctx.reply(
       '✅ *Account Sincronizzato!*\n\n' +

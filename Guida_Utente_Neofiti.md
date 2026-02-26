@@ -1,6 +1,6 @@
-# 🚀 Guida Ufficiale SoftiBridge Auto-Trading (Versione Cloud)
+# 🚀 Guida Ufficiale BCS AI Auto-Trading (Versione Cloud)
 
-Benvenuto in **SoftiBridge**! Abbiamo rivoluzionato il nostro sistema per offrirti un'esperienza "chiavi in mano".
+Benvenuto in **BCS AI**! Abbiamo rivoluzionato il nostro sistema per offrirti un'esperienza "chiavi in mano".
 **Non hai più bisogno di scaricare programmi, non ti serve un computer sempre acceso (VPS) e non devi installare nessun Expert Advisor (EA) sulla tua piattaforma di trading.**
 
 Tutto avviene nel Cloud (sui nostri server super veloci). Segui questi semplicissimi passaggi per iniziare a copiare i segnali in automatico sul tuo conto MT4 o MT5 in meno di 5 minuti.
@@ -9,9 +9,9 @@ Tutto avviene nel Cloud (sui nostri server super veloci). Segui questi semplicis
 
 ## 🛠️ PASSO 1: Iscrizione e Licenza
 
-1. Vai sulla nostra **Web Dashboard** (il sito web di SoftiBridge).
+1. Vai sulla nostra **Web Dashboard** (il sito web di BCS AI).
 2. Crea un account o accedi con le tue credenziali.
-3. Assicurati di avere una **License Key** attiva (il tuo codice personale che inizia per `SB-`, es. `SB-ABCD-1234-WXYZ`). Puoi vederla o acquistarla direttamente dalla tua area riservata.
+3. Assicurati di avere una **License Key** attiva (il tuo codice personale che inizia per `BCS-`, es. `BCS-ABCD-1234-WXYZ`). Puoi vederla o acquistarla direttamente dalla tua area riservata.
 
 ---
 
@@ -37,10 +37,10 @@ Per permettere al nostro Cloud di eseguire le operazioni per te, devi collegare 
 Ora che il conto è collegato, devi solo "svegliare" il tuo assistente Telegram.
 
 1. Apri l'app **Telegram** dal tuo smartphone o computer.
-2. Cerca il nostro Bot Ufficiale SoftiBridge (ti forniremo il link esatto, es. `@SoftiBridge_Bot`).
+2. Cerca il nostro Bot Ufficiale BCS AI (ti forniremo il link esatto, es. `@BCSAI_Bot`).
 3. Apri la chat con il Bot e premi il pulsante **AVVIA** (oppure scrivi `/start`).
 4. Il Bot ti darà il benvenuto e ti chiederà la tua chiave.
-5. **Invia al Bot la tua License Key** copiandola e incollandola (es. `SB-ABCD-1234-WXYZ`).
+5. **Invia al Bot la tua License Key** copiandola e incollandola (es. `BCS-ABCD-1234-WXYZ`).
 
 🎉 **FATTO!** Se la chiave è corretta, il Bot ti risponderà con un messaggio verde: *"Configurazione Completata!"*
 
@@ -69,4 +69,4 @@ Non devi fare nient'altro.
 > Basterà cambiare o cancellare le tue credenziali, oppure sospendere il tuo abbonamento. Il server Cloud non eseguirà alcun ordine sui tuoi conti senza una licenza attiva.
 
 **I miei soldi sono al sicuro?**
-> SoftiBridge non tocca mai i tuoi soldi. I fondi rimangono sul tuo conto del Broker. Noi ci limitiamo a inviare le "istruzioni" (Compra/Vendi) al broker, che esegue gli ordini per te. Le tue password sono conservate in casseforti digitali cifrate in modo irreversibile per chiunque tranne che per il server automatico di invio ordini.
+> BCS AI non tocca mai i tuoi soldi. I fondi rimangono sul tuo conto del Broker. Noi ci limitiamo a inviare le "istruzioni" (Compra/Vendi) al broker, che esegue gli ordini per te. Le tue password sono conservate in casseforti digitali cifrate in modo irreversibile per chiunque tranne che per il server automatico di invio ordini.

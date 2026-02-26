@@ -1,4 +1,4 @@
-# Guida ai Test - SoftiBridge (Acquisizione Clienti)
+# Guida ai Test - BCS AI (Acquisizione Clienti)
 
 Per testare il flusso completo "Live" (dalla landing page fino all'acquisizione della licenza), dovrai simulare sia la parte **Cliente (LITE B)** che la parte **Amministratore (ADMIN)**. 
 
@@ -38,8 +38,8 @@ Prima di iniziare i test, assicurati di avere a portata di mano i seguenti dati:
    - L'utente riceverà un messaggio dal Bot Telegram con la chiave di licenza.
 4. **Attivazione Bot:**
    - L'utente copia la sua License Key dalla Dashboard.
-   - Apre Telegram, cerca il bot (`@SoftiBridgeAdminBot` o il nome che gli hai dato).
-   - Invia il comando: `/sync [CHIAVE_LICENZA] [ID_INSTALLAZIONE_CASUALE]` (es. `/sync SB-1234-5678 112233`).
+   - Apre Telegram, cerca il bot (`@BCSAI_AdminBot` o il nome che gli hai dato).
+   - Invia il comando: `/sync [CHIAVE_LICENZA] [ID_INSTALLAZIONE_CASUALE]` (es. `/sync BCS-1234-5678 112233`).
    - Scarica il file `token.json` generato dal bot per inserirlo nel suo Expert Advisor.
 
 ---

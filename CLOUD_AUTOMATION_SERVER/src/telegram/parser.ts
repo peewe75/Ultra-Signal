@@ -57,14 +57,14 @@ const TP_PATTERNS = [
 
 function extractSide(text: string): TradeSignal['side'] | null {
   const normalized = text.toUpperCase();
-  
+
   if (normalized.includes('BUY LIMIT')) return 'BUY_LIMIT';
   if (normalized.includes('SELL LIMIT')) return 'SELL_LIMIT';
   if (normalized.includes('BUY STOP')) return 'BUY_STOP';
   if (normalized.includes('SELL STOP')) return 'SELL_STOP';
   if (normalized.includes('BUY')) return 'BUY';
   if (normalized.includes('SELL')) return 'SELL';
-  
+
   return null;
 }
 
@@ -97,24 +97,35 @@ function extractStopLoss(text: string): number | null {
 
 function extractTakeProfits(text: string): number[] {
   const tps: number[] = [];
-  
-  const tp1Match = text.match(/tp1[:\s]*([\d.]+)/i);
-  if (tp1Match) tps.push(parseFloat(tp1Match[1]));
-  
-  const tp2Match = text.match(/tp2[:\s]*([\d.]+)/i);
-  if (tp2Match) tps.push(parseFloat(tp2Match[1]));
-  
-  const tp3Match = text.match(/tp3[:\s]*([\d.]+)/i);
-  if (tp3Match) tps.push(parseFloat(tp3Match[1]));
-  
-  const genericTpMatches = text.matchAll(/(?:tp|take\s*profit)[:\s]*([\d.]+)/gi);
+
+  // Cerchiamo i TP specifici (TP1, TP2, TP3) seguiti obbligatoriamente da un prezzo (spazio o due punti necessari)
+  const tp1Match = text.match(/tp1[:\s]+([\d.]+)/i);
+  if (tp1Match) {
+    const val = parseFloat(tp1Match[1]);
+    if (!isNaN(val) && val > 10) tps.push(val);
+  }
+
+  const tp2Match = text.match(/tp2[:\s]+([\d.]+)/i);
+  if (tp2Match) {
+    const val = parseFloat(tp2Match[1]);
+    if (!isNaN(val) && val > 10) tps.push(val);
+  }
+
+  const tp3Match = text.match(/tp3[:\s]+([\d.]+)/i);
+  if (tp3Match) {
+    const val = parseFloat(tp3Match[1]);
+    if (!isNaN(val) && val > 10) tps.push(val);
+  }
+
+  // Cerca altri TP generici, ma assicuriamoci che siano separati da spazio o due punti e che non siano "1, 2, 3"
+  const genericTpMatches = text.matchAll(/(?:take\s*profit|tp)(?![123])[:\s]+([\d.]+)/gi);
   for (const match of genericTpMatches) {
     const tp = parseFloat(match[1]);
-    if (!tps.includes(tp)) {
+    if (!isNaN(tp) && tp > 10 && !tps.includes(tp)) {
       tps.push(tp);
     }
   }
-  
+
   return tps.sort((a, b) => a - b);
 }
 
@@ -158,7 +169,7 @@ function extractEntryPrice(text: string): number | null {
   if (atMatch) {
     return parseFloat(atMatch[1]);
   }
-  
+
   return extractPrice(text, ENTRY_PATTERNS);
 }
 

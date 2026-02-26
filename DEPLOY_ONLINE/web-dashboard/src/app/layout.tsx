@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SoftiBridge Automation",
+  title: "BCS AI Bridge",
   description: "La tecnologia bridge definitiva per MT4 e MT5",
 };
 

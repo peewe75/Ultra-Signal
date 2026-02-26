@@ -12,8 +12,8 @@ export default function LandingPage() {
       <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-black/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center font-bold text-white">SB</div>
-            <span className="font-semibold text-xl tracking-tight">SoftiBridge</span>
+            <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center font-bold text-white">BCS</div>
+            <span className="font-semibold text-xl tracking-tight">BCS AI</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
             <Link href="#features" className="hover:text-white transition-colors">Features</Link>
@@ -148,8 +148,10 @@ export default function LandingPage() {
       <footer className="border-t border-white/10 py-12 bg-black mt-20">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center font-bold text-white text-xs">SB</div>
-            <span className="font-semibold text-gray-400">SoftiBridge Automation</span>
+            <div className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center font-bold text-white text-xs">BCS</div>
+            <span className="font-semibold text-gray-400">
+              powered by <Link href="https://www.bcs-ai.com" target="_blank" className="hover:text-blue-400 transition-colors">BCS AI</Link> &copy; 2026
+            </span>
           </div>
           <div className="flex gap-6 text-sm text-gray-500">
             <Link href="#" className="hover:text-white transition">Privacy Policy</Link>

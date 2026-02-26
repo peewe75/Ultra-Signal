@@ -1,7 +1,7 @@
 {
   "name": "cloud-automation-server",
   "version": "1.0.0",
-  "description": "SoftiBridge Cloud Automation Server for Telegram signal processing and MT4/MT5 trading",
+  "description": "BCS AI Cloud Automation Server for Telegram signal processing and MT4/MT5 trading",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -15,7 +15,7 @@
     "mt4",
     "mt5"
   ],
-  "author": "SoftiBridge",
+  "author": "BCS AI",
   "license": "MIT",
   "dependencies": {
     "@types/express": "^5.0.6",

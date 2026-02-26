@@ -102,7 +102,7 @@ export default function UserDashboard() {
       {/* Header */}
       <header className="border-b border-white/10 bg-zinc-950 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center font-bold text-white">SB</div>
+          <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center font-bold text-white">BCS</div>
           <span className="font-semibold text-xl">Dashboard Utente</span>
         </div>
         <div className="flex items-center gap-4">
@@ -196,7 +196,7 @@ export default function UserDashboard() {
             <h3 className="font-semibold text-blue-400 mb-2">Istruzioni Rapide</h3>
             <ol className="text-sm text-blue-100/70 space-y-4 list-decimal list-inside">
               <li>Copia la tua <strong>License Key</strong>.</li>
-              <li>Avvia il bot Telegram <code>@SoftiBridgeAdminBot</code>.</li>
+              <li>Avvia il bot Telegram <code>@BCSAI_AdminBot</code>.</li>
               <li>Invia il comando <code>/sync [CHIAVE] [INSTALL_ID]</code>.</li>
               <li>Scarica il token e inseriscilo nella cartella <code>Files</code> di MT4/MT5.</li>
             </ol>

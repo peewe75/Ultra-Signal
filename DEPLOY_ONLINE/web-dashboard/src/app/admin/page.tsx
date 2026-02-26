@@ -10,8 +10,8 @@ export default function AdminDashboard() {
       {/* Header */}
       <header className="border-b border-red-500/20 bg-zinc-950 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded bg-red-600 flex items-center justify-center font-bold text-white">AD</div>
-          <span className="font-semibold text-xl text-red-500">SoftiBridge Control Center</span>
+          <div className="w-8 h-8 rounded bg-red-600 flex items-center justify-center font-bold text-white">BCS</div>
+          <span className="font-semibold text-xl text-red-500">BCS AI Control Center</span>
         </div>
         <div className="flex items-center gap-4">
           <Button variant="destructive" className="bg-red-600 hover:bg-red-700 text-white rounded-xl uppercase font-bold px-6 tracking-wide" onClick={() => {

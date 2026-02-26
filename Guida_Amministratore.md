@@ -1,6 +1,6 @@
-# 👑 Guida Ufficiale Amministratore (Admin) - SoftiBridge Cloud
+# 👑 Guida Ufficiale Amministratore (Admin) - BCS AI Cloud
 
-Questa guida è destinata esclusivamente agli amministratori del sistema SoftiBridge Cloud. Contiene le procedure operative per configurare il server, gestire l'abbonamento degli utenti e monitorare le operazioni automatiche.
+Questa guida è destinata esclusivamente agli amministratori del sistema BCS AI Cloud. Contiene le procedure operative per configurare il server, gestire l'abbonamento degli utenti e monitorare le operazioni automatiche.
 
 ---
 
@@ -25,7 +25,7 @@ Per avviare il server in ambiente di produzione (es. su una VPS dedicata o un se
 2. Esegui la compilazione TypeScript (se non già fatta): `npm run build`
 3. Avvia il server: `npm start`
 
-Il server resterà in ascolto 24/7. Si consiglia l'uso di un gestore di processi come `pm2` per assicurare il riavvio automatico in caso di crash (`pm2 start dist/index.js --name "SoftiBridge-Cloud"`).
+Il server resterà in ascolto 24/7. Si consiglia l'uso di un gestore di processi come `pm2` per assicurare il riavvio automatico in caso di crash (`pm2 start dist/index.js --name "BCS-AI-Cloud"`).
 
 ---
 
@@ -34,7 +34,7 @@ Il server resterà in ascolto 24/7. Si consiglia l'uso di un gestore di processi
 Il sistema utilizza il metodo "Bot in Master Channel" per catturare i segnali.
 
 1. **Creazione Bot:** Se non lo hai ancora fatto, crea un bot tramite [@BotFather](https://t.me/BotFather) su Telegram e ottieni il Token.
-2. **Accesso ai Canali:** Aggiungi il tuo Bot (es. `@SoftiBridge_Bot`) come **Amministratore** a tutti i canali Telegram VIP da cui desideri prelevare i segnali. Il bot deve avere i permessi per leggere i messaggi.
+2. **Accesso ai Canali:** Aggiungi il tuo Bot (es. `@BCSAI_Bot`) come **Amministratore** a tutti i canali Telegram VIP da cui desideri prelevare i segnali. Il bot deve avere i permessi per leggere i messaggi.
 3. **Identificativo Sorgente:** Ogni canale Telegram ha un ID numerico (es. `-1001234567890`) o un username (es. `@SegnaliVIP`). Assicurati di comunicare questo identificativo ai tuoi clienti, poiché dovranno inserirlo nella loro Web Dashboard alla voce "Sorgente Segnali".
 
 ---
@@ -66,7 +66,7 @@ Tutte le operazioni processate dal Cloud Server vengono registrate in tempo real
 - **L'utente non riceve i segnali:**
   1. Verifica nel pannello Admin che la sua licenza sia `ACTIVE`.
   2. Dalla Web Dashboard dell'utente, verifica che la "Sorgente Segnali" configurata coincida esattamente con l'ID/Username del canale master monitorato dal Bot.
-  3. Verifica che il Bot Telegram gli abbia confermato la connessione (l'utente deve aver inviato al bot la propria chiavetta `SB-XXX-XXX`).
+  3. Verifica che il Bot Telegram gli abbia confermato la connessione (l'utente deve aver inviato al bot la propria chiavetta `BCS-XXX-XXX`).
   4. Controlla i `trade_logs` in Firestore per vedere se c'è un errore specifico per quel numero di conto (es. password errata).
 
 - **Cambio Fornitore Segnali o Formato Messaggi:**

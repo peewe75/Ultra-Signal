@@ -41,26 +41,49 @@ export async function getActiveAccountsForSource(signalSourceId: string): Promis
   const tradeClients: TradeClient[] = [];
 
   try {
+    // Find users who have this signal source allowed
     let usersSnapshot = await firestore.collection('users')
-      .where('licenseStatus', '==', 'ACTIVE')
       .where('allowed_signal_source', '==', signalSourceId)
       .get();
 
     // If no users matched the explicit strict channel, check if it's a private chat test
     if (usersSnapshot.empty) {
+      console.log(`No explicit matches for source ID: ${signalSourceId}, checking telegramChatId matching...`);
       usersSnapshot = await firestore.collection('users')
-        .where('licenseStatus', '==', 'ACTIVE')
         .where('telegramChatId', '==', signalSourceId)
         .get();
+    }
 
-      if (!usersSnapshot.empty) {
-        console.log(`Executing private test signal for user ID matching ${signalSourceId} chat`);
+    if (usersSnapshot.empty) {
+      // Also check for bot username matches if they put the bot name as source
+      const botMe = await firestore.collection('config').doc('bot').get();
+      const botUsername = botMe.exists ? botMe.data()?.username : '@BCSAIVIP_bot';
+
+      if (signalSourceId === botUsername) {
+        console.log('Signal came from bot itself or private chat, checking all users with matching ChatId...');
       }
     }
 
     for (const userDoc of usersSnapshot.docs) {
       try {
         const userData = userDoc.data();
+
+        // CHECK LICENSE: Either top-level flag or subcollection
+        const isLicenseActive = userData.licenseStatus === 'ACTIVE' ||
+          userData.license_status === 'ACTIVE';
+
+        if (!isLicenseActive) {
+          // Double check subcollection to be sure
+          const licSnap = await userDoc.ref.collection('licenses')
+            .where('status', '==', 'ACTIVE')
+            .limit(1)
+            .get();
+
+          if (licSnap.empty) {
+            console.log(`User ${userDoc.id} has no active license found.`);
+            continue;
+          }
+        }
 
         if (!userData.tradingAccount) {
           console.log(`User ${userDoc.id} has no trading account configured`);

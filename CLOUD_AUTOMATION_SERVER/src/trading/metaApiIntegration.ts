@@ -78,31 +78,36 @@ class MetaApiIntegration {
     console.log(`Connected successfully to ${client.accountNumber}`);
 
     const activeClient = {
+      connection,
       async getAccountInfo() {
         const info = await connection.getAccountInformation();
         return { balance: info.balance, equity: info.equity };
       },
       async trade(options: any) {
         console.log('Executing live trade:', options);
-        let tradeType = options.type === 'MARKET' ? 'ORDER_TYPE_BUY' : 'ORDER_TYPE_BUY_LIMIT';
-        if (options.side === 'SELL') {
-          tradeType = options.type === 'MARKET' ? 'ORDER_TYPE_SELL' : 'ORDER_TYPE_SELL_LIMIT';
-        }
-
         try {
-          const result = await connection.createMarketBuyOrder(
-            options.symbol,
-            options.volume,
-            options.stopLoss,
-            options.takeProfit
-          );
-          // Since we don't have a 1-to-1 dynamic factory mapper for brevity, we assume Market Buy for the demo.
-          // If it's a SELL, we invoke `createMarketSellOrder`
-          if (options.side === 'SELL') {
-            const sr = await connection.createMarketSellOrder(options.symbol, options.volume, options.stopLoss, options.takeProfit);
-            return { orderId: sr.orderId, price: sr.price };
+          let result;
+          const isLimit = options.type === 'LIMIT';
+          const isStop = options.type === 'STOP';
+
+          if (options.side === 'BUY') {
+            if (isLimit) {
+              result = await connection.createLimitBuyOrder(options.symbol, options.volume, options.price, options.stopLoss, options.takeProfit);
+            } else if (isStop) {
+              result = await connection.createStopBuyOrder(options.symbol, options.volume, options.price, options.stopLoss, options.takeProfit);
+            } else {
+              result = await connection.createMarketBuyOrder(options.symbol, options.volume, options.stopLoss, options.takeProfit);
+            }
+          } else { // SELL
+            if (isLimit) {
+              result = await connection.createLimitSellOrder(options.symbol, options.volume, options.price, options.stopLoss, options.takeProfit);
+            } else if (isStop) {
+              result = await connection.createStopSellOrder(options.symbol, options.volume, options.price, options.stopLoss, options.takeProfit);
+            } else {
+              result = await connection.createMarketSellOrder(options.symbol, options.volume, options.stopLoss, options.takeProfit);
+            }
           }
-          return { orderId: result.orderId, price: result.price };
+          return { orderId: result.orderId, price: result.price || options.price };
         } catch (err: any) {
           throw new Error(`Execution error: ${err.message}`);
         }
@@ -136,11 +141,29 @@ class MetaApiIntegration {
       const lotSize = this.calculateLotSize(client, accountInfo);
 
       const side = signal.side.includes('BUY') ? 'BUY' : 'SELL';
-      const orderType = signal.entryPrice ? 'LIMIT' : 'MARKET';
+
+      let orderType: 'MARKET' | 'LIMIT' | 'STOP' = 'MARKET';
+      if (signal.entryPrice) {
+        try {
+          // Fetch current price to decide between LIMIT and STOP
+          const priceInfo = await metaApi.connection.getSymbolPrice(signal.symbol);
+          const currentPrice = side === 'BUY' ? priceInfo.ask : priceInfo.bid;
+
+          if (side === 'BUY') {
+            orderType = signal.entryPrice > currentPrice ? 'STOP' : 'LIMIT';
+          } else {
+            orderType = signal.entryPrice < currentPrice ? 'STOP' : 'LIMIT';
+          }
+          console.log(`Current ${signal.symbol} price: ${currentPrice}. Entry: ${signal.entryPrice}. Selected Type: ${orderType}`);
+        } catch (e) {
+          console.warn(`Could not fetch current price for ${signal.symbol}, defaulting to LIMIT:`, e);
+          orderType = 'LIMIT';
+        }
+      }
 
       const tradeResult = await metaApi.trade({
         symbol: signal.symbol,
-        type: orderType as 'MARKET' | 'LIMIT',
+        type: orderType,
         side: side as 'BUY' | 'SELL',
         volume: lotSize,
         price: signal.entryPrice || undefined,
@@ -159,7 +182,7 @@ class MetaApiIntegration {
       };
 
     } catch (error: any) {
-      const errorMessage = error?.message || typeof error === 'string' ? error : JSON.stringify(error);
+      const errorMessage = error?.message || (typeof error === 'string' ? error : JSON.stringify(error));
       console.error(`Trade failed for ${client.accountNumber}:`, error);
 
       return {
@@ -221,7 +244,7 @@ async function logTradeResults(signal: TradeSignal, results: TradeResult[]): Pro
         accountNumber: r.client.accountNumber,
         brokerServer: r.client.brokerServer,
         success: r.success,
-        errorReason: r.errorReason || null,
+        errorReason: r.errorReason ? String(r.errorReason) : null,
         orderId: r.orderId || null,
         executedPrice: r.executedPrice || null,
         executedLots: r.executedLots || null,
