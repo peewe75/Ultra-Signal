@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Clock, LogIn, Send, MessageSquare, Info, UserPlus, Key, MousePointer2, TrendingUp, Zap } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { motion, Variants, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -100,7 +100,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-bold">BCS</div>
-            <span className="font-semibold text-xl tracking-tight text-white uppercase italic">BCS AI</span>
+            <span className="font-semibold text-xl tracking-tight text-white uppercase italic tracking-tighter">BCS AI</span>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/admin" className="hidden md:flex text-[10px] font-black text-red-400 border border-red-500/20 bg-red-500/10 rounded-full px-4 py-1.5 uppercase hover:bg-red-500/20 transition-all">Area Admin</Link>
@@ -114,7 +114,7 @@ export default function LandingPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 mb-8 backdrop-blur-md">
             <Clock className="w-3.5 h-3.5 text-blue-400" />
-            <span className="text-[10px] font-bold text-blue-200 uppercase tracking-[0.2em] font-mono">COUNTDOWN LANCIO: 28 FEB 2026 - 00:00</span>
+            <span className="text-[10px] font-bold text-blue-200 uppercase tracking-[0.2em] font-mono">LANCIO: 28 FEB 2026 - 00:00</span>
           </div>
           <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-[0.9] uppercase italic italic-shadow">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 pb-2 inline-block">Future.</span><br />
@@ -141,7 +141,7 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* USER JOURNEY CON IMMAGINI AI */}
+      {/* USER JOURNEY */}
       <section className="py-32 relative bg-gradient-to-b from-transparent via-blue-900/5 to-transparent">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
@@ -152,14 +152,9 @@ export default function LandingPage() {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-12 items-center">
-            {/* Navigazione Testuale (Sinistra) */}
             <div className="lg:w-1/3 flex flex-col gap-4">
               {steps.map((step, i) => (
-                <div
-                  key={i}
-                  onMouseEnter={() => setActiveStep(i)}
-                  className={`p-6 md:p-8 rounded-[2rem] border transition-all cursor-pointer group relative overflow-hidden ${activeStep === i ? 'bg-[#0d0d0d] border-blue-500/40 shadow-2xl scale-[1.02]' : 'bg-transparent border-white/5 opacity-40 hover:opacity-100'}`}
-                >
+                <div key={i} onMouseEnter={() => setActiveStep(i)} className={`p-6 md:p-8 rounded-[2rem] border transition-all cursor-pointer group relative overflow-hidden ${activeStep === i ? 'bg-[#0d0d0d] border-blue-500/40 shadow-2xl scale-[1.02]' : 'bg-transparent border-white/5 opacity-40 hover:opacity-100'}`}>
                   <div className="relative z-10">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-colors ${activeStep === i ? 'bg-blue-600 text-white' : 'bg-zinc-800 text-gray-400'}`}>
                       <step.icon className="w-5 h-5" />
@@ -171,31 +166,16 @@ export default function LandingPage() {
               ))}
             </div>
 
-            {/* Visualizzatore Immagine (Destra) */}
-            <div className="lg:w-2/3 w-full relative group">
+            <div className="lg:w-2/3 w-full relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[3rem] blur opacity-10" />
               <div className="relative aspect-[16/10] md:aspect-[16/9] bg-zinc-900 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeStep}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={steps[activeStep].img}
-                      alt={steps[activeStep].title}
-                      fill
-                      className="object-cover"
-                      priority
-                      unoptimized // Immagini locali grandi
-                    />
+                  <motion.div key={activeStep} initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.6 }} className="absolute inset-0">
+                    <Image src={steps[activeStep].img} alt={steps[activeStep].title} fill className="object-cover" priority unoptimized />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-8 left-8">
                       <div className="flex items-center gap-3 bg-blue-600 border border-white/20 px-6 py-2 rounded-2xl shadow-2xl">
-                        <span className="text-xs font-black uppercase tracking-[0.2em]">Step {activeStep + 1} di 4</span>
+                        <span className="text-xs font-black uppercase tracking-[0.2em]">Punto {activeStep + 1} di 4</span>
                       </div>
                     </div>
                   </motion.div>
@@ -203,32 +183,39 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+
+          <div className="mt-20 text-center">
+            <p className="text-blue-500 font-black text-[10px] uppercase tracking-[0.4em] flex items-center justify-center gap-3">
+              <Zap className="w-4 h-4 fill-blue-500" /> Alimentato da Infrastruttura Cloud
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Pricing & White Label */}
+      {/* Pricing Table */}
       <section id="pricing" className="py-24 relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16 underline decoration-blue-500/30 underline-offset-8">
-          <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tighter italic uppercase italic-shadow text-white">Prezzi & Piani</h2>
+          <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tighter italic uppercase text-white">Prezzi & Piani</h2>
         </div>
         <div className="flex justify-center mb-24">
           <div className="w-full max-w-2xl relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-[3rem] blur opacity-25" />
             <div className="relative bg-[#0a0a0a80] border border-white/10 p-10 md:p-16 rounded-[3rem] shadow-3xl backdrop-blur-2xl text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-8">Disponibile dal 28.02</div>
-              <h3 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase italic tracking-tighter py-4 leading-tight">Provaci <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 py-2">Gratis</span></h3>
-              <p className="text-lg text-gray-500 mb-10 uppercase tracking-widest font-bold">14 Giorni Accesso Totale</p>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-8">Attivabile dal 28.02</div>
+              <h3 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase italic leading-tight tracking-tighter py-4">Provaci <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 py-2">Gratis</span></h3>
+              <p className="text-lg text-gray-500 mb-10 uppercase tracking-widest font-bold">14 Giorni Full Access</p>
 
+              {/* Live mode logic */}
               {IS_LIVE_MODE ? (
                 <Button asChild className="w-full h-20 bg-blue-600 hover:bg-blue-500 text-white rounded-3xl text-2xl font-black shadow-xl uppercase">
-                  <Link href="/sign-up">Attiva Ora</Link>
+                  <Link href="/sign-up">Inizia Prova</Link>
                 </Button>
               ) : (
                 <Button onClick={showWaitToast} className="w-full h-20 bg-zinc-900 border border-white/10 text-gray-500 rounded-3xl text-xl font-black uppercase tracking-tighter cursor-not-allowed">
-                  Coming Soon 28/02
+                  Lancio 28 Febbraio
                 </Button>
               )}
-              <p className="mt-8 text-xs text-gray-500 font-bold uppercase tracking-widest">Rinnovo facoltativo a 30€/mese</p>
+              <p className="mt-8 text-xs text-gray-500 font-bold uppercase tracking-widest">Opzionale 30€/mese dopo la prova</p>
             </div>
           </div>
         </div>
@@ -236,54 +223,55 @@ export default function LandingPage() {
         {/* White Label */}
         <div className="p-10 md:p-20 bg-gradient-to-br from-zinc-900 to-black border border-white/5 rounded-[4rem] relative overflow-hidden group shadow-2xl">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]" />
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="relative z-20 flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="flex-1 text-center lg:text-left">
               <h4 className="text-blue-500 font-black text-xs uppercase mb-6 tracking-[0.4em] flex items-center justify-center lg:justify-start gap-3">
-                <MessageSquare className="w-4 h-4" /> Professional Ecosystem
+                <MessageSquare className="w-4 h-4" /> Partner Program
               </h4>
-              <h2 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tighter uppercase italic leading-none">Canale Segnali?</h2>
+              <h2 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tighter uppercase italic leading-none">White Label</h2>
               <p className="text-xl text-gray-400/80 font-medium italic border-l-4 border-blue-600 pl-8 leading-relaxed max-w-2xl bg-black/20 py-4 rounded-r-3xl">
-                &quot;Crea il tuo impero. Offri una soluzione <span className="text-white underline decoration-blue-500 font-bold not-italic">White Label</span> personalizzata ai tuoi membri e domina il mercato.&quot;
+                &quot;Porta la tua sala segnali al livello superiore con la nostra tecnologia brevettata a marchio tuo.&quot;
               </p>
             </div>
-            <div className="flex flex-col gap-4 w-full lg:w-auto">
+            <div className="flex flex-col gap-4 w-full lg:w-auto relative z-30">
               <Button onClick={() => setIsPartnerModalOpen(true)} className="h-24 px-16 bg-white text-black hover:bg-zinc-100 rounded-[2.5rem] font-black text-2xl shadow-3xl transition-transform hover:scale-[1.03] uppercase italic tracking-tighter">
                 Candidati Ora
               </Button>
-              <div className="text-[10px] text-gray-500 font-black uppercase tracking-[0.3em] text-center flex items-center justify-center gap-2">
-                <Zap className="w-3 h-3 text-blue-500" /> Slot Limitati disponibili
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-24">
+      {/* Partners Section (REINSTATED & IMPROVED VISIBILITY) */}
+      <section className="py-32 relative z-[50]">
         <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-600">Strategic Partners</h4>
+          </div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-10">
-            <Link href="https://www.bcs-ai.com" target="_blank" className="p-12 bg-zinc-900/40 border border-white/5 rounded-[3rem] text-center hover:border-blue-500/40 transition-all w-full md:w-80 shadow-2xl group">
-              <div className="text-blue-500/80 font-black mb-3 text-[10px] tracking-widest uppercase mb-4 opacity-60">Finance Partner</div>
-              <div className="text-white text-2xl font-black italic tracking-tighter group-hover:scale-105 transition-transform">BCS ADVISORY</div>
+            <Link href="https://www.bcs-ai.com" target="_blank" className="p-12 bg-zinc-900/60 border border-white/10 rounded-[3rem] text-center hover:border-blue-500/40 transition-all w-full md:w-80 shadow-2xl backdrop-blur-xl group relative overflow-hidden">
+              <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="text-blue-500 font-black text-[10px] tracking-widest uppercase mb-4 opacity-60">Finance & Strategy</div>
+              <div className="text-white text-2xl font-black italic tracking-tighter group-hover:scale-105 transition-transform relative z-10">BCS ADVISORY</div>
             </Link>
-            <Link href="https://www.studiodigitale.eu" target="_blank" className="p-12 bg-zinc-900/40 border border-white/5 rounded-[3rem] text-center hover:border-purple-500/40 transition-all w-full md:w-80 shadow-2xl group">
-              <div className="text-purple-500/80 font-black mb-3 text-[10px] tracking-widest uppercase mb-4 opacity-60">Legal Counsel</div>
-              <div className="text-white text-2xl font-black italic tracking-tighter group-hover:scale-105 transition-transform">STUDIO LEGALE BCS</div>
+            <Link href="https://www.studiodigitale.eu" target="_blank" className="p-12 bg-zinc-900/60 border border-white/10 rounded-[3rem] text-center hover:border-purple-500/40 transition-all w-full md:w-80 shadow-2xl backdrop-blur-xl group relative overflow-hidden">
+              <div className="absolute inset-0 bg-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="text-purple-500 font-black text-[10px] tracking-widest uppercase mb-4 opacity-60">Legal Counsel</div>
+              <div className="text-white text-2xl font-black italic tracking-tighter group-hover:scale-105 transition-transform relative z-10">STUDIO LEGALE BCS</div>
             </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12 bg-black relative z-10 text-center">
+      <footer className="border-t border-white/5 py-12 bg-black relative z-[60] text-center">
         <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-zinc-800 to-black border border-white/10 flex items-center justify-center font-black text-white text-sm">BCS</div>
-            <span className="text-gray-500 text-xs font-bold uppercase tracking-[0.4em]">powered by <Link href="https://www.bcs-ai.com" target="_blank" className="text-white hover:text-blue-500 transition-colors">BCS ADVISORY</Link></span>
+            <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center font-black text-white text-sm">BCS</div>
+            <span className="text-gray-500 text-[10px] font-black uppercase tracking-[0.5em]">powered by <Link href="https://www.bcs-ai.com" target="_blank" className="text-white hover:text-blue-500">BCS ADVISORY</Link></span>
           </div>
-          <div className="flex gap-12 text-[10px] font-black uppercase tracking-widest text-gray-600">
-            <Link href="/privacy" className="hover:text-blue-500 transition-colors underline underline-offset-4 decoration-white/5">Privacy Protocol</Link>
-            <span>&copy; 2026 All Rights Reserved</span>
+          <div className="text-[10px] font-black uppercase tracking-widest text-gray-700">
+            &copy; 2026 BCS Advisory // Tutte le innovazioni sono riservate.
           </div>
         </div>
       </footer>
