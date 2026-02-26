@@ -1,0 +1,20 @@
+GUIDA CLIENTE (SoftiBridge Automation su VPS)
+=============================================
+
+Questa cartella contiene i file per far funzionare SoftiBridge sui tuoi Metatrader (MT4 o MT5). Abbiamo automatizzato quasi tutto il processo per te!
+
+PASSO 1: INIZIALIZZAZIONE VPS
+Fai tasto destro su `setup_vps.ps1` e seleziona "Esegui con PowerShell".
+Questo script creerà automaticamente le cartelle necessarie in "Documenti Pubblici\Common\Files" e imposterà il client SoftiBridge per l'avvio automatico ad ogni riavvio della VPS.
+
+PASSO 2: INSTALLAZIONE RAPIDA EXPERT ADVISOR (MT4/MT5)
+Fai tasto destro su `mt_auto_linker.ps1` e seleziona "Esegui con PowerShell".
+Questo script scansionerà la tua VPS trovando tutte le installazioni attive di MT4/MT5 e vi copierà automaticamente i file dei Bot EA. Non è necessario copiare e incollare nulla a mano!
+
+PASSO 3: AVVIO DEL COPIATORE E SINCRONIZZAZIONE
+1. Fai doppio clic su `SoftiBridge_Client.exe` per avviarlo (lo script al Passo 1 lo farà ripartire da solo ai prossimi riavvii).
+2. Tieni aperta la finestra del Client in background. 
+3. Il Client estrarrà un "INSTALL_ID" (visibile a schermo). Usa questo ID, unitamente alla tua Chiave Licenza (che trovi nella tua Web Dashboard), per registrare la VPS tramite il Bot Telegram usando il comando `/sync [CHIAVE_LICENZA] [IL_TUO_INSTALL_ID]`.
+
+DISINSTALLAZIONE
+Se desideri rimuovere SoftiBridge dalla VPS attuale (ad esempio per spostare la tua licenza su una VPS nuova), fai doppio clic su `uninstall_vps.bat` per rimuovere l'avvio automatico e le cartelle condivise. Dopodiché, rimuovi gli EA dai tuoi terminali MetaTrader.

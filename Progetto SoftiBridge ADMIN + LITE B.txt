@@ -1,0 +1,197 @@
+SoftiBridge ADMIN + LITE B
+Infrastruttura Professionale di Gestione Licenze e Distribuzione Operativa
+
+SoftiBridge è l’architettura proprietaria sviluppata per garantire controllo totale, sicurezza strutturale e gestione scalabile delle licenze per ambienti MT4 e MT5.
+
+Il sistema è composto da due moduli integrati:
+
+• SoftiBridge ADMIN (nodo centrale su VPS)
+• SoftiBridge LITE B (versione commerciale cliente)
+
+Questa divisione consente a Softi di mantenere il pieno controllo dell’infrastruttura, distribuendo al cliente una versione stabile, sicura e non manipolabile.
+
+1️⃣ SoftiBridge ADMIN
+Il centro di controllo assoluto
+
+SoftiBridge ADMIN è installato su VPS e opera tramite un unico BOT Telegram amministrativo.
+
+È la fonte ufficiale e unica di verità dell’intero ecosistema.
+
+Funzioni principali:
+
+• Creazione e generazione licenze
+• Attivazione immediata
+• Sospensione o revoca in tempo reale
+• Controllo stato licenza (ACTIVE / EXPIRED / SUSPENDED / REVOKED)
+• Gestione quote installazioni
+• Gestione numero gruppi
+• Gestione numero account
+• Reminder automatici (D7 / D3 / D0)
+• Grace period 48 ore
+• Sistema upsell automatico
+• Emergency 24H
+• Extra 7D
+• Blocco globale (kill_all)
+• Blocco singolo cliente / installazione / account
+• Audit log completo
+• Backup automatico database
+• Esportazioni CSV e ZIP storico licenze
+
+Il database SQLite centralizzato memorizza:
+
+• Clienti
+• Licenze
+• Piani attivi
+• Quote consumate
+• Scadenze
+• Storico modifiche
+• Eventi sistema
+
+Tutta la gestione avviene via Telegram con comandi protetti.
+Non esistono pannelli web vulnerabili.
+
+2️⃣ SoftiBridge LITE B
+La versione commerciale per il cliente
+
+LITE B è la versione distribuita ai clienti finali.
+
+Viene installata su PC o VPS del cliente e comunica con l’ADMIN tramite API sicure:
+
+https://api.softibridge.com
+
+https://admin.softibridge.com
+
+Caratteristiche tecniche:
+
+• Nessun token permanente salvato
+• Validazione tramite ADMIN
+• Token breve durata (~6 ore)
+• Cache locale 48 ore
+• Blocco immediato se stato ≠ ACTIVE
+• Grace 48h in caso di EXPIRED
+• Blocco immediato per SUSPENDED o REVOKED
+• EA MT4/MT5 hard block (INIT_FAILED) se token non valido
+• Nessun messaggio inviato nei gruppi operativi
+• Comunicazione esclusiva in DM e lato sistema
+
+LITE B è progettato per essere:
+
+• Deterministico
+• Non aggirabile
+• Minimalista
+• Stabile
+
+3️⃣ Struttura Ufficiale dei Piani LITE B
+
+SoftiBridge LITE B è organizzato su tre livelli scalabili.
+
+🔹 BASIC
+
+Per trader singoli o operatività contenuta.
+
+Quote:
+• 1 installazione
+• 1 gruppo
+• 1 account MT4 o MT5
+
+Durate disponibili:
+
+30 giorni – 59€
+90 giorni – 149€
+180 giorni – 269€
+365 giorni – 449€
+
+Versione MT4+MT5:
+
+30 giorni – 79€
+90 giorni – 199€
+180 giorni – 349€
+365 giorni – 599€
+
+🔹 PRO
+
+Per operatività multi-gruppo o multi-account.
+
+Quote:
+• 3 installazioni
+• 3 gruppi
+• 3 account
+
+Durate disponibili:
+
+30 giorni – 109€
+90 giorni – 279€
+180 giorni – 499€
+365 giorni – 899€
+
+Versione MT4+MT5:
+
+30 giorni – 149€
+90 giorni – 349€
+180 giorni – 649€
+365 giorni – 1199€
+
+🔹 ENTERPRISE
+
+Per strutture professionali o gestione estesa.
+
+Quote:
+• 10 installazioni
+• 10 gruppi
+• 10 account
+
+Durate disponibili:
+
+30 giorni – 199€
+90 giorni – 499€
+180 giorni – 899€
+365 giorni – 1499€
+
+Versione MT4+MT5:
+
+30 giorni – 249€
+90 giorni – 649€
+180 giorni – 1199€
+365 giorni – 1999€
+
+4️⃣ Estensioni Straordinarie
+
+SoftiBridge integra un sistema di estensioni controllate:
+
+Emergency 24H – 49€
+Extra 7D – 129€
+
+Con limiti automatici e trigger di upgrade verso piano superiore in caso di uso ricorrente.
+
+5️⃣ Logica di Sicurezza Licenza
+
+ACTIVE → operatività completa
+EXPIRED → blocco dopo 48h grace
+SUSPENDED → blocco immediato
+REVOKED → blocco immediato
+
+In caso di API down:
+• Valida cache locale 48h
+• Grace 48h mantenuta
+
+Il sistema è strutturalmente progettato per impedire:
+
+• Installazioni non autorizzate
+• Superamento quote piano
+• Uso post scadenza
+• Manipolazione token
+
+6️⃣ Vantaggio Strategico per Softi
+
+SoftiBridge ADMIN + LITE B consente:
+
+• Controllo totale distribuzione
+• Protezione commerciale
+• Scalabilità internazionale
+• Audit completo per tutela legale
+• Automazione pagamenti manuali
+• Sistema pronto per future integrazioni
+
+È una struttura chiusa, proprietaria, centralizzata.
+
+Un’infrastruttura progettata per crescere.

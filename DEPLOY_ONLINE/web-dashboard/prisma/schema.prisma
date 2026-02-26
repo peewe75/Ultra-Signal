@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id    String @id // clerk_id
+  email String @unique
+  role  String @default("user") // 'user', 'admin'
+}
+
+model Subscription {
+  id         String   @id @default(cuid())
+  user_id    String
+  stripe_id  String?  @unique
+  plan       String   // BASIC, PRO, ENTERPRISE
+  status     String   // ACTIVE, EXPIRED, CANCELED
+  expires_at DateTime
+  created_at DateTime @default(now())
+}
+
+model License {
+  id           String   @id @default(cuid())
+  user_id      String
+  license_key  String   @unique
+  install_id   String?
+  mt_accounts  String[] // Array of strings for allowed MT4/MT5 accounts
+  status       String   @default("ACTIVE") // ACTIVE, SUSPENDED, REVOKED, EXPIRED
+  created_at   DateTime @default(now())
+}

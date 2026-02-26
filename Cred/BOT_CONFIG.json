@@ -1,0 +1,7 @@
+{
+  "telegram_bot_token": "8458332531:AAFULP_KCUOWb0oq4H8rPl9tqQ1ZQt-vYIg",
+  "send_boot_message": true,
+  "rate_limit_ms": 700,
+  "dedupe_window_sec": 60,
+  "lock_stale_sec": 600
+}

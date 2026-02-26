@@ -1,0 +1,8 @@
+{
+  "license_sent_it": "🔐 {brand} – License Key\n\n{key}\n\nProcedura:\n1) INSTALL\n2) ACTIVATE (incolla key)\n3) RUN\n\nPiano: {plan}\nScadenza: {expiry}\nAccounts: {accounts_used}/{accounts_limit}\n\nSupporto: {support}",
+  "upgrade_sent_it": "🚀 {brand} – Upgrade Piano\n\nIl tuo piano è stato aggiornato a: {plan}\nScadenza: {expiry}\nAccounts: {accounts_used}/{accounts_limit}\n\n🔐 Nuova License Key:\n{key}\n\nProcedura:\n1) ACTIVATE (incolla key)\n2) RUN\n\nSupporto: {support}",
+  "remind_d7_it": "⏳ Promemoria rinnovo\n\nLa tua licenza scade tra 7 giorni.\nPiano: {plan}\nScadenza: {expiry}\n\nSupporto: {support}",
+  "remind_d3_it": "⏳ Promemoria rinnovo\n\nLa tua licenza scade tra 3 giorni.\nPiano: {plan}\nScadenza: {expiry}\n\nSupporto: {support}",
+  "remind_d0_it": "⚠️ Licenza in scadenza oggi\n\nLa tua licenza scade oggi.\nPiano: {plan}\nScadenza: {expiry}\n\nSupporto: {support}",
+  "remind_m3_it": "⛔ Licenza scaduta\n\nLa tua licenza è scaduta da 3 giorni.\nPiano: {plan}\nScadenza: {expiry}\n\nSupporto: {support}"
+}

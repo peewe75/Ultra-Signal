@@ -1,0 +1,23 @@
+GUIDA PER L'AMMINISTRATORE (Gestione Licenze SoftiBridge)
+=========================================================
+
+Questa cartella contiene l'applicazione per gestire le licenze e i Token dei tuoi clienti.
+
+PREREQUISITI:
+1. Devi avere un Bot Telegram creato tramite BotFather.
+2. Devi avere copiato il "Token" (es. 123456789:ABCdefGHI...).
+
+INSTALLAZIONE:
+1. Apri il file `config/config.json` con il Blocco Note.
+2. Sostituisci la scritta "PASTE_TELEGRAM_BOT_TOKEN_HERE" con il VERO Token del tuo bot Telegram.
+3. Salva e chiudi il file.
+
+AVVIO DEL SISTEMA:
+Fai doppio clic su `SoftiBridge_Admin_CLI.exe`.
+Si aprirà una schermata nera da cui potrai:
+  - Creare Nuove Licenze
+  - Revocare Licenze
+  - Aggiungere Metatrader a una licenza
+  - Sospendere un cliente
+
+Importante: Ogni volta che premi un tasto per compiere un'azione, il sistema aggiornerà il database locale (`data/softibridge.db`) e invierà in automatico un messaggio Telegram al cliente se hai inserito correttamente il token!

@@ -1,0 +1,6 @@
+{
+  "telegram_token": "8458332531:AAFULP_KCUOWb0oq4H8rPl9tqQ1ZQt-vYIg",
+  "firebase_credentials_path": "config/firebase.json",
+  "port": 8080,
+  "log_level": "INFO"
+}

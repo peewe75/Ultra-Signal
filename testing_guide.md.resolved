@@ -1,0 +1,63 @@
+# Guida ai Test - SoftiBridge (Acquisizione Clienti)
+
+Per testare il flusso completo "Live" (dalla landing page fino all'acquisizione della licenza), dovrai simulare sia la parte **Cliente (LITE B)** che la parte **Amministratore (ADMIN)**. 
+
+Di seguito i dati necessari e le operazioni da eseguire passo passo.
+
+## 1. Dati Necessari per il Test
+
+Prima di iniziare i test, assicurati di avere a portata di mano i seguenti dati:
+
+### Lato Sistema / Admin
+- **Telegram Bot Token**: Il token del bot creato su BotFather (es. `123456789:ABCDefghIJKLmnopQRSTuvwxyz`).
+- **Telegram ID Admin**: Il tuo ID numerico personale (es. `1958421`) necessario per essere riconosciuto come creatore/admin del bot.
+
+### Lato Cliente (Simulazione Utente)
+- **Account Telegram Cliente**: Un account Telegram (diverso se possibile, o lo stesso per praticità) con cui l'utente interagirà con il bot.
+- **Telegram ID Cliente**: L'ID numerico dell'utente (che si ottiene scrivendo a `@userinfobot`).
+- **Indirizzo Email**: Una mail di test (o account Google/GitHub) per registrarsi sulla dashboard web.
+
+> [!CAUTION]
+> Assicurati che nel file [.env.local](file:///c:/xampp/htdocs/SoftiBridge_Automation_FINAL_v1.0.2/web-dashboard/.env.local) della cartella `web-dashboard` sia configurata la variabile `TELEGRAM_BOT_TOKEN=iltuotoken`, altrimenti la dashboard non riuscirà a inviare il messaggio di benvenuto su Telegram!
+
+---
+
+## 2. Flusso di Test (Cosa deve fare il Cliente)
+
+1. **Registrazione (Landing Page / Web Dashboard):**
+   - L'utente visita la Landing Page e clicca su "Inizia Ora" o "Acquista".
+   - Viene reindirizzato alla pagina di Signup/Login (gestita da Clerk).
+   - Crea un nuovo account.
+2. **Inserimento Telegram ID:**
+   - Appena entrato nella Dashboard, un popup obbligatorio chiederà di inserire il proprio **Telegram ID Numerico**.
+   - L'utente inserisce l'ID (es. `987654321`) e salva.
+3. **Simulazione Pagamento & Abbonamento PRO:**
+   - *Nota: Poiché Stripe non è ancora collegato, abbiamo modificato temporaneamente il codice.*
+   - Al salvataggio del Telegram ID, il sistema simulerà in automatico l'acquisto del piano **PRO**.
+   - Verrà generata una **License Key** e la Dashboard si sbloccherà mostrando i dettagli della licenza (Piano PRO, 3 account disponibili, ecc.).
+   - L'utente riceverà un messaggio dal Bot Telegram con la chiave di licenza.
+4. **Attivazione Bot:**
+   - L'utente copia la sua License Key dalla Dashboard.
+   - Apre Telegram, cerca il bot (`@SoftiBridgeAdminBot` o il nome che gli hai dato).
+   - Invia il comando: `/sync [CHIAVE_LICENZA] [ID_INSTALLAZIONE_CASUALE]` (es. `/sync SB-1234-5678 112233`).
+   - Scarica il file `token.json` generato dal bot per inserirlo nel suo Expert Advisor.
+
+---
+
+## 3. Flusso di Test (Cosa deve fare l'Admin)
+
+1. **Monitoraggio Dashboard (Opzionale, se presente):**
+   - Dal momento che la gestione principale avviene via bot Telegram, l'amministratore controllerà l'arrivo dell'utente tramite il Node centrale.
+2. **Gestione tramite Bot Telegram (VPS Admin):**
+   - L'admin (con il suo Telegram ID autorizzato) apre il Bot su Telegram.
+   - Può usare i comandi amministrativi per verificare che il cliente sia stato registrato nel database SQLite del bot.
+   - **Comandi Utili da testare:**
+     - `/users` per vedere l'elenco degli utenti.
+     - `/user [ID_TELEGRAM_CLIENTE]` per ispezionare le licenze o i dettagli dell'utente appena creato.
+     - `/suspend [ID_LICENZA_CLIENTE]` per simulare una sospensione della licenza.
+3. **Gestione Firebase:**
+   - L'Admin può aprire la console di Firebase e verificare sotto la collezione `users` che il `[USER_ID]` abbia salvato correttamente il `telegram_id` e la sottocollezione `licenses`.
+
+## Prossimi Passi
+
+Appena mi darai l'ok, procederò a **modificare il codice per simulare l'attivazione automatica del piano PRO** e, in questo modo, potrai testarlo in locale in tempo reale senza dover far gestire i pagamenti a Stripe.
