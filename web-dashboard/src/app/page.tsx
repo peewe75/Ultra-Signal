@@ -217,9 +217,9 @@ export default function LandingPage() {
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-[3rem] blur opacity-25" />
             <div className="relative bg-[#0a0a0a80] border border-white/10 p-10 md:p-16 rounded-[3rem] shadow-3xl backdrop-blur-2xl text-center">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-8">Attivabile dal 28.02</div>
-              <h3 className="text-7xl md:text-[6.5rem] font-black mb-8 uppercase italic tracking-tighter leading-[0.8] flex flex-col items-center">
+              <h3 className="text-7xl md:text-[6.5rem] font-black mb-8 uppercase italic tracking-tighter leading-[0.9] flex flex-col items-center px-10">
                 <span className="text-white">Provaci</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 py-1">Gratis</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 py-2 px-2">Gratis</span>
               </h3>
               <p className="text-lg text-gray-500 mb-10 uppercase tracking-widest font-bold">14 Giorni Full Access</p>
 
