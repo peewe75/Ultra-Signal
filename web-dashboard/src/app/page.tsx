@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Check, Zap, Shield, ArrowRight, ExternalLink, LogIn, Layers, Clock } from "lucide-react";
+import { Clock, LogIn } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { motion, Variants } from "framer-motion";
@@ -94,9 +94,7 @@ export default function LandingPage() {
             <Link href="/admin" className="flex text-sm font-medium text-red-400 hover:text-red-300 transition-colors items-center gap-1 border border-red-500/20 bg-red-500/5 rounded-full px-4 py-1.5 hover:bg-red-500/10">
               <LogIn className="w-3.5 h-3.5" /> Area Admin
             </Link>
-            <Button onClick={scrollToCountdown} className="hidden sm:flex bg-white text-black hover:bg-gray-100 rounded-full px-6 font-semibold shadow-lg shadow-white/10 transition-all hover:scale-105 text-sm">
-              Accedi
-            </Button>
+            <Link href="/sign-in" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Accedi</Link>
           </div>
         </div>
       </motion.nav>
