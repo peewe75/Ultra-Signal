@@ -26,7 +26,7 @@ export async function POST() {
             return new NextResponse("Manca il profilo Customer su Stripe", { status: 400 });
         }
 
-        const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+        const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://ultrabot.space";
 
         const session = await stripe.billingPortal.sessions.create({
             customer: stripeCustomerId,

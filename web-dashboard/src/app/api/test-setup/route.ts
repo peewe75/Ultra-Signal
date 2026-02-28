@@ -6,6 +6,9 @@ import { makeKey, LicensePayload } from "@/lib/server/license_core";
 export async function GET(req: Request) {
     try {
         const clerk = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
+        if (process.env.NODE_ENV === "production" && req.headers.get("x-secret-setup") !== "BCS_ACTIVATE_2026") {
+            return new NextResponse("Forbidden in Production", { status: 403 });
+        }
         const db = getDb();
         if (!db) return new NextResponse("No DB", { status: 500 });
 
