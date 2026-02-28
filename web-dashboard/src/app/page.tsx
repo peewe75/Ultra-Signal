@@ -11,7 +11,7 @@ import Image from "next/image";
 // ==========================================================
 // 🚀 LANCIATORE UFFICIALE BCS AI
 // ==========================================================
-const IS_LIVE_MODE = false;
+const IS_LIVE_MODE = true;
 // ==========================================================
 
 export default function LandingPage() {

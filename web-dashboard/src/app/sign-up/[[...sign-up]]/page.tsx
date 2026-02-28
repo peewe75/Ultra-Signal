@@ -5,7 +5,7 @@ import { Clock, Lock } from "lucide-react";
 // ==========================================================
 // 🚀 LANCIATORE UFFICIALE BCS AI
 // ==========================================================
-const IS_LIVE_MODE = false; // <--- DOMANI METTI A "true" PER RIPRISTINARE CLERK
+const IS_LIVE_MODE = true; // ✅ LIVE
 // ==========================================================
 
 export default function Page() {
